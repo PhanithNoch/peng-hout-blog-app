@@ -85,3 +85,4 @@ Route::get('user/me', [App\Http\Controllers\UserAuthController::class, 'me'])->m
 Route::post('logout', [App\Http\Controllers\UserAuthController::class, 'logout'])->middleware('auth:api');
 
 Route::post('posts', [App\Http\Controllers\PostController::class, 'store'])->middleware('auth:api');
+Route::get('posts', [App\Http\Controllers\PostController::class, 'index'])->middleware('auth:api');

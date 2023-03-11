@@ -23,4 +23,13 @@ class PostController extends Controller
             'data' => $post
         ]);
     }
+
+    /// list all post leatest with user 
+    public function index(){
+        $posts = Post::with(['user','likes','comments'])->latest()->get();
+        return response()->json([
+            'status' => 'success',
+            'data' => $posts
+        ]);
+    }
 }
