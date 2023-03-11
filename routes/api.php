@@ -22,54 +22,54 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 /// GET POST PUT DELETE [posts]
 
-Route::get('posts',function(){
-    $posts = DB::table('posts')->get();
-    return response()->json([
-        'status' => 'success',
-        'data' => $posts
+// Route::get('posts',function(){
+//     $posts = DB::table('posts')->get();
+//     return response()->json([
+//         'status' => 'success',
+//         'data' => $posts
     
-    ]);
-});
+//     ]);
+// });
 
-/// show post by id 
-Route::get('posts/{id}',function($id){
-    $post = DB::table('posts')->where('id',$id)->first();
-    return response()->json([
-        'status' => 'success',
-        'data' => $post
+// /// show post by id 
+// Route::get('posts/{id}',function($id){
+//     $post = DB::table('posts')->where('id',$id)->first();
+//     return response()->json([
+//         'status' => 'success',
+//         'data' => $post
     
-    ]);
-});
-/// create post 
-Route::post('posts',function(){
-   $post =  DB::insert('insert into posts (fullname,gender, phone) values (?, ?, ?)', ['Joe','male','123456789']);
-    return response()->json([
-     'status' => 'success',
-     'data' => $post
-    ]);
+//     ]);
+// });
+// /// create post 
+// Route::post('posts',function(){
+//    $post =  DB::insert('insert into posts (fullname,gender, phone) values (?, ?, ?)', ['Joe','male','123456789']);
+//     return response()->json([
+//      'status' => 'success',
+//      'data' => $post
+//     ]);
 
 
-});
+// });
 
-/// update post
-Route::put('posts/{id}',function($id){
-    $post = DB::table('posts')->where('id',$id)->update(['fullname' => 'Joe']);
-    return response()->json([
-        'status' => 'success',
-        'data' => $post
+// /// update post
+// Route::put('posts/{id}',function($id){
+//     $post = DB::table('posts')->where('id',$id)->update(['fullname' => 'Joe']);
+//     return response()->json([
+//         'status' => 'success',
+//         'data' => $post
     
-    ]);
-});
+//     ]);
+// });
 
-/// delete post
-Route::delete('posts/{id}',function($id){
-    $post = DB::table('posts')->where('id',$id)->delete();
-    return response()->json([
-        'status' => 'success',
-        'data' => $post
+// /// delete post
+// Route::delete('posts/{id}',function($id){
+//     $post = DB::table('posts')->where('id',$id)->delete();
+//     return response()->json([
+//         'status' => 'success',
+//         'data' => $post
     
-    ]);
-});
+//     ]);
+// });
 
 
 /// register user with passport
@@ -81,3 +81,7 @@ Route::post('login', [App\Http\Controllers\UserAuthController::class, 'login']);
 Route::post('user/update/{id}', [App\Http\Controllers\UserAuthController::class, 'update']);
 /// get me 
 Route::get('user/me', [App\Http\Controllers\UserAuthController::class, 'me'])->middleware('auth:api');
+
+Route::post('logout', [App\Http\Controllers\UserAuthController::class, 'logout'])->middleware('auth:api');
+
+Route::post('posts', [App\Http\Controllers\PostController::class, 'store'])->middleware('auth:api');

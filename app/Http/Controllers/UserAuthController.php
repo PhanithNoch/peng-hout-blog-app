@@ -122,5 +122,22 @@ class UserAuthController extends Controller
             ], 404);
         }
     }
+
+    /// logut user 
+    public function logout(Request $request){
+        $user = auth()->user();
+        if($user){
+            $user->tokens()->delete();
+            return response()->json([
+                'status' => 'success',
+                'data' => 'user logged out'
+            ],200);
+        }else{
+            return response()->json([
+                'status' => 'error',
+                'data' => 'user not found'
+            ], 404);
+        }
+    }
 }
 
